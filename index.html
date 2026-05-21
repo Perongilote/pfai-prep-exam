@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results Predictor</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Left Sidebar -->
+        <aside class="sidebar-left">
+            <div class="logo-container">
+                <div class="logo-icon"><i class="fa-solid fa-eye"></i></div>
+                <h2>RESULTSPREDICTOR</h2>
+                <p>EMAIL CAMPAIGN</p>
+            </div>
+
+            <div class="control-group">
+                <select><option>🇺🇸 English</option></select>
+            </div>
+            <div class="control-group">
+                <label>Time Unit</label>
+                <select id="timeUnit"><option>Week</option><option>Month</option></select>
+            </div>
+            <div class="control-group">
+                <label>Number of Periods</label>
+                <input type="number" id="periods" value="12">
+            </div>
+            <div class="control-group">
+                <label>Currency</label>
+                <select><option>$ USD</option></select>
+            </div>
+
+            <div class="info-box">
+                <h4>Would you like to leverage a widget like this one in your campaigns?</h4>
+                <p>Widget like this are always valued by customers.</p>
+                <p>They are a great way to stimulate engagement and get more people to talk about your products.</p>
+                <p>It's also a great way to generate leads.</p>
+                <a href="#">Click here to learn more about how to get one.</a>
+            </div>
+            
+            <p class="credit">Logo: Designed by <strong>Freepik</strong></p>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="card chart-card">
+                <div class="chart-header">
+                    <h3>Metrics Over Time</h3>
+                    <div class="legend">
+                        <span class="legend-item"><span class="dot green"></span> Profit</span>
+                        <span class="legend-item"><span class="dot blue"></span> Customers</span>
+                    </div>
+                </div>
+                <canvas id="metricsChart"></canvas>
+            </div>
+
+            <h3 class="section-title">Revenue</h3>
+            <div class="sliders-grid">
+                <div class="card slider-card">
+                    <div class="slider-header">
+                        <label>Launching Customers <i class="fa-regular fa-circle-question"></i></label>
+                        <input type="number" id="val-launching" value="119" readonly>
+                    </div>
+                    <input type="range" id="launching" min="0" max="1000" value="119" class="slider slider-blue">
+                    <div class="slider-labels"><span>0</span><span>1000</span></div>
+                </div>
+                <div class="card slider-card">
+                    <div class="slider-header">
+                        <label>Revenue Per Conversion <i class="fa-regular fa-circle-question"></i></label>
+                        <input type="number" id="val-revPerConv" value="64.8" readonly>
+                    </div>
+                    <input type="range" id="revPerConv" min="0" max="1000" value="64.8" step="0.1" class="slider slider-blue">
+                    <div class="slider-labels"><span>0</span><span>1000</span></div>
+                </div>
+                <div class="card slider-card">
+                    <div class="slider-header">
+                        <label>Customer Growth Rate <i class="fa-regular fa-circle-question"></i></label>
+                        <input type="number" id="val-growth" value="0.15" readonly>
+                    </div>
+                    <input type="range" id="growth" min="0" max="1" value="0.15" step="0.01" class="slider slider-green">
+                    <div class="slider-labels"><span>0</span><span>1</span></div>
+                </div>
+                <div class="card slider-card">
+                    <div class="slider-header">
+                        <label>Average Response Rate <i class="fa-regular fa-circle-question"></i></label>
+                        <input type="number" id="val-response" value="0.2" readonly>
+                    </div>
+                    <input type="range" id="response" min="0" max="1" value="0.2" step="0.01" class="slider slider-green">
+                    <div class="slider-labels"><span>0</span><span>1</span></div>
+                </div>
+            </div>
+
+            <h3 class="section-title">Expenses</h3>
+            <div class="sliders-grid">
+                <div class="card slider-card">
+                    <div class="slider-header">
+                        <label>Customer Churn Rate <i class="fa-regular fa-circle-question"></i></label>
+                        <input type="number" id="val-churn" value="0.02" readonly>
+                    </div>
+                    <input type="range" id="churn" min="0" max="1" value="0.02" step="0.01" class="slider slider-blue">
+                    <div class="slider-labels"><span>0</span><span>1</span></div>
+                </div>
+                <div class="card slider-card">
+                    <div class="slider-header">
+                        <label>Variable Cost <i class="fa-regular fa-circle-question"></i></label>
+                        <input type="number" id="val-variable" value="10.8" readonly>
+                    </div>
+                    <input type="range" id="variable" min="0" max="1000" value="10.8" step="0.1" class="slider slider-blue">
+                    <div class="slider-labels"><span>0</span><span>1000</span></div>
+                </div>
+                <div class="card slider-card">
+                    <div class="slider-header">
+                        <label>Fixed Costs <i class="fa-regular fa-circle-question"></i></label>
+                        <input type="number" id="val-fixed" value="175" readonly>
+                    </div>
+                    <input type="range" id="fixed" min="0" max="1000" value="175" class="slider slider-green">
+                    <div class="slider-labels"><span>0</span><span>1000</span></div>
+                </div>
+                <div class="card slider-card">
+                    <div class="slider-header">
+                        <label>Starting Cost <i class="fa-regular fa-circle-question"></i></label>
+                        <input type="number" id="val-starting" value="0" readonly>
+                    </div>
+                    <input type="range" id="starting" min="0" max="1000" value="0" class="slider slider-blue">
+                    <div class="slider-labels"><span>0</span><span>1000</span></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="sidebar-right">
+            <div class="card summary-card">
+                <h3>Campaign Summary</h3>
+                <p class="subtitle">Profitable in week #1</p>
+                <hr>
+                <h4>At week #<span id="sum-period">12</span>:</h4>
+                <div class="summary-stats">
+                    <div class="stat-row"><span>Customers:</span> <strong id="sum-customers">3052</strong></div>
+                    <div class="stat-row"><span>Revenue:</span> <strong id="sum-revenue" class="green-text">$39,558.73</strong></div>
+                    <div class="stat-row"><span>Expenses:</span> <strong id="sum-expenses" class="red-text">$8,693.12</strong></div>
+                </div>
+                
+                <div class="highlight-box">
+                    <span>Total Profit</span>
+                    <strong id="sum-profit">$30,865.61</strong>
+                </div>
+                
+                <div class="highlight-box">
+                    <span>Average Retention</span>
+                    <strong>50.00 weeks</strong>
+                </div>
+                
+                <div class="highlight-box">
+                    <span>Return on Investment</span>
+                    <strong id="sum-roi">355.06%</strong>
+                </div>
+            </div>
+
+            <div class="card action-card">
+                <label>Export Data</label>
+                <button class="btn btn-green"><i class="fa-solid fa-download"></i> Download CSV</button>
+            </div>
+
+            <div class="card action-card">
+                <label>Load Data</label>
+                <button class="btn btn-blue"><i class="fa-solid fa-upload"></i> Load CSV</button>
+            </div>
+
+            <div class="card social-card action-card">
+                <label>Let's connect</label>
+                <div class="social-grid">
+                    <button class="btn-icon bg-blue"><i class="fa-brands fa-facebook-f"></i></button>
+                    <button class="btn-icon bg-orange"><i class="fa-brands fa-instagram"></i></button>
+                    <button class="btn-icon bg-dark"><i class="fa-solid fa-link"></i></button>
+                    <button class="btn-icon bg-blue"><i class="fa-brands fa-facebook-messenger"></i></button>
+                </div>
+            </div>
+        </aside>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
